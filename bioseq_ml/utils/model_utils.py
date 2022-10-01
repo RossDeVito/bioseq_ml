@@ -139,40 +139,36 @@ class ModelBuilder:
 		net = self.build_network(model_spec['network_spec'])
 		return model_class(net=net, **kwargs)
 
-		
-		
 
+
+# def create_module_from_spec(module_spec, custom_modules=None):
+# 	"""Create module from specification dict.
+
+# 	Currently supports modules from bioseq_ml.modules and torch.nn.
+
+# 	Args:
+# 		module_spec (dict): Specification dict for module. Includes keys:
+# 			'type' (str): Type of module to create. Can be class name from
+# 				custom_modules, 'bioseq_ml.modules', or 'torch.nn'. The
+# 				three potential module sources are searched in that order.
+# 			'kwargs' (dict, optional): Keyword arguments for module. If not
+# 				specified, no kwargs are passed.
+# 		custom_modules (list, optional): List of custom modules to include.
+# 	"""
+# 	module_type = module_spec['type']
+# 	module_kwargs = module_spec.get('kwargs', {})
+
+# 	if custom_modules is not None:
+# 		custom_modules = {m.__name__: m for m in custom_modules}
+# 		if module_type in custom_modules:
+# 			return custom_modules[module_type](**module_kwargs)
 	
-
-
-def create_module_from_spec(module_spec, custom_modules=None):
-	"""Create module from specification dict.
-
-	Currently supports modules from bioseq_ml.modules and torch.nn.
-
-	Args:
-		module_spec (dict): Specification dict for module. Includes keys:
-			'type' (str): Type of module to create. Can be class name from
-				custom_modules, 'bioseq_ml.modules', or 'torch.nn'. The
-				three potential module sources are searched in that order.
-			'kwargs' (dict, optional): Keyword arguments for module. If not
-				specified, no kwargs are passed.
-		custom_modules (list, optional): List of custom modules to include.
-	"""
-	module_type = module_spec['type']
-	module_kwargs = module_spec.get('kwargs', {})
-
-	if custom_modules is not None:
-		custom_modules = {m.__name__: m for m in custom_modules}
-		if module_type in custom_modules:
-			return custom_modules[module_type](**module_kwargs)
-	
-	bioseq_modules = dict(
-		inspect.getmembers(modules, inspect.isclass)
-	)
-	if module_type in bioseq_modules:
-		return bioseq_modules[module_type](**module_kwargs)
-	elif module_type in nn.__dict__:
-		return nn.__dict__[module_type](**module_kwargs)
-	else:
-		raise ValueError(f'Unknown module type: {module_type}')
+# 	bioseq_modules = dict(
+# 		inspect.getmembers(modules, inspect.isclass)
+# 	)
+# 	if module_type in bioseq_modules:
+# 		return bioseq_modules[module_type](**module_kwargs)
+# 	elif module_type in nn.__dict__:
+# 		return nn.__dict__[module_type](**module_kwargs)
+# 	else:
+# 		raise ValueError(f'Unknown module type: {module_type}')

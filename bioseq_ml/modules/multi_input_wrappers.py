@@ -46,3 +46,7 @@ class MultiInputApply(nn.Module):
 			return [self.network(item) for item in x]
 		else:
 			raise ValueError('Input must be dict or list')
+
+	@staticmethod
+	def requires_model_builder():
+		return True
