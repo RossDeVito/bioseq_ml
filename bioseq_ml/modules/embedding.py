@@ -42,10 +42,10 @@ class OneHotEncoding(nn.Module):
 		return self.num_classes
 
 
-class MultiSeqEmbedding(nn.Module):
+class SeqEmbedding(nn.Module):
 	"""
-	Embedding input module for input consisting of one or more int
-	sequences to be seperatesly embedded and stacked.
+	Embedding input module for input consisting of one or more equal length
+	int sequence channels to be seperatesly embedded and stacked.
 
 	Args:
 		emb_scheme (dict): Dictionary defining what keys are used for
@@ -110,3 +110,47 @@ class MultiSeqEmbedding(nn.Module):
 				output_dim += emb_kwargs['embedding_dim']
 
 		return output_dim
+
+
+class MultiSeqEmbedding(nn.Module):
+	"""
+	Module for embedding multiple inputs with the same SeqEmbedding type
+	embedding.
+
+	Args:
+		input_map (dict of dicts): The output of this module will be a dict
+			mapping the keys from this dict to the embeddings definded by the
+			dicts that are the values. These inner dicts map keys from the
+			input dict to input type names, which will be used to map them to
+			the propper embedding. The input type names should match the keys
+			of emb_scheme.
+		emb_scheme (dict): Dictionary defining what how different input type
+			names are embedded. Keys of dict are the input type names to embed.
+			The value for each key is a dict with kwargs to nn.Embedding or
+			the key 'num_classes' for OneHotEncoding. If using OneHotEncoding,
+			the 'output_fmt' key should not be used, as it will be handled
+			by this module.
+		output_fmt (str): Output format, either default 'channels_last' or
+			'channels_first'.
+
+	Returns:
+		Dict mapping keys of input map to the embedded input.
+	"""
+
+	def __init__(self, input_map, emb_scheme, output_fmt='channels_last'):
+		super().__init__()
+		self.input_map = input_map
+		self.output_fmt = output_fmt
+		self.embedding = SeqEmbedding(emb_scheme, output_fmt=output_fmt)
+
+	def forward(self, x):
+		emb = {}
+
+		for key, emb_map in self.input_map.items():
+			input_dict = {v: x[k] for k, v in emb_map.items()}
+			emb[key] = self.embedding(input_dict)
+
+		return emb
+
+	def get_output_dim(self):
+		return self.embedding.get_output_dim()

@@ -2,7 +2,7 @@
 	"model_type": "BinaryClassifier",
 	"network_spec": [
 		{
-			"type": "MultiSeqEmbedding",
+			"type": "SeqEmbedding",
 			"kwargs": {
 				"emb_scheme": {
 					"seq": {
