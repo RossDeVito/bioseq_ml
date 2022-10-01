@@ -1,0 +1,5 @@
+learning_rate: 0.001
+pos_weight: null
+reduce_lr_factor: 0.1
+reduce_lr_on_plateau: true
+reduce_lr_patience: 7

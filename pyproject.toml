@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "bioseq-ml"
+version = "0.1.0"
+description = "Machine learning framework for bio related sequences like DNA, RNA, and proteins"
+authors = ["Ross DeVito <rdevito@ucsd.edu>"]
+readme = "README.md"
+packages = [{include = "bioseq_ml"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,1 @@
+from bioseq_ml.data_modules.data_module import CSVDataModule

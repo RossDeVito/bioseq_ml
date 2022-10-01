@@ -1,0 +1,1 @@
+{"test_Precision": 0.7976028919219971, "test_Recall": 0.796454906463623, "test_F1Score": 0.7901729941368103, "test_loss": 0.43504273891448975, "test_TN": 1308.0, "test_FP": 240.0, "test_FN": 374.0, "test_TP": 1101.0, "num_params": 13185}

@@ -1,0 +1,1 @@
+from bioseq_ml.models.binary_classifier import BinaryClassifier

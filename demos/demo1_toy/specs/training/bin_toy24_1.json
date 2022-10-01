@@ -1,0 +1,12 @@
+{
+	"batch_size": 32,
+	"num_workers": 5,
+	"max_epochs": 100,
+	"learning_rate": 1e-3,
+	"reduce_lr_on_plateau": true,
+	"reduce_lr_patience": 7,
+	"reduce_lr_factor": 0.1,
+	"early_stopping_patience": 12,
+	"training_output_dir": "training_output",
+	"experiment_name": "toy_24"
+}

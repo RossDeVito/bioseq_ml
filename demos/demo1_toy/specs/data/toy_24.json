@@ -1,0 +1,8 @@
+{
+	"data_path": "data/data_sl32_nmotifs24.csv",
+	"split_col": "split",
+	"dataset_kwargs": {
+		"label_col": "label",
+		"seq_col": "seq"
+	}
+}	
